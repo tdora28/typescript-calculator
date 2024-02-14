@@ -4,28 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simple Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
     <h1>TypeScript Calculator</h1>
     <div id="calculator">
       <input type="text" id="display" disabled />
-      <button onclick="Calc.clearDisplay()">C</button>
-      <button onclick="Calc.inputNumber(7)">7</button>
-      <button onclick="Calc.inputNumber(8)">8</button>
-      <button onclick="Calc.inputNumber(9)">9</button>
-      <button onclick="Calc.inputOperator('/')">/</button>
-      <button onclick="Calc.inputNumber(4)">4</button>
-      <button onclick="Calc.inputNumber(5)">5</button>
-      <button onclick="Calc.inputNumber(6)">6</button>
-      <button onclick="Calc.inputOperator('*')">*</button>
-      <button onclick="Calc.inputNumber(1)">1</button>
-      <button onclick="Calc.inputNumber(2)">2</button>
-      <button onclick="Calc.inputNumber(3)">3</button>
-      <button onclick="Calc.inputOperator('-')">-</button>
-      <button onclick="Calc.inputNumber(0)">0</button>
-      <button onclick="Calc.calculateResult()">=</button>
-      <button onclick="Calc.inputOperator('+')">+</button>
+      <div class="buttons">
+        <button onclick="Calc.inputOperator('+')" class="btn-operator">+</button>
+        <button onclick="Calc.inputOperator('-')" class="btn-operator">-</button>
+        <button onclick="Calc.inputOperator('*')" class="btn-operator">*</button>
+        <button onclick="Calc.inputOperator('/')" class="btn-operator">/</button>
+        <button onclick="Calc.inputNumber(7)">7</button>
+        <button onclick="Calc.inputNumber(8)">8</button>
+        <button onclick="Calc.inputNumber(9)">9</button>
+        <button onclick="Calc.inputNumber(4)">4</button>
+        <button onclick="Calc.inputNumber(5)">5</button>
+        <button onclick="Calc.inputNumber(6)">6</button>
+        <button onclick="Calc.inputNumber(1)">1</button>
+        <button onclick="Calc.inputNumber(2)">2</button>
+        <button onclick="Calc.inputNumber(3)">3</button>
+        <button onclick="Calc.inputNumber(0)">0</button>
+        <button onclick="Calc.clearDisplay()" class="btn-clear">C</button>
+        <button onclick="Calc.calculateResult()" class="btn-equal">=</button>
+      </div>
     </div>
 
     <script src="./public/calculator.js" type="module"></script>

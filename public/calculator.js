@@ -1,6 +1,5 @@
 "use strict";
 const display = document.querySelector('#display');
-console.log('testing watch mode...');
 // Shows "0" on the display initially
 display.value = '0';
 // Follows the different input states
