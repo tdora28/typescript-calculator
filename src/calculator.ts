@@ -1,51 +1,19 @@
-/**
- * The current input value as a string.
- */
-
-/**
- * The previous input value as a string.
- */
-
-/**
- * The current operation symbol (+, -, *, /) or null if none.
- */
-
-/**
- * Calculates the result of the current operation and updates the current input value.
- * If the previous or current input values are not valid numbers, or the operation is null, does nothing.
- */
-
-/**
- * Appends a number to the current input value and updates the display.
- * @param num - The number to append.
- */
-
-/**
- * Sets the current operation and moves the current input value to the previous input value.
- * If there is already a previous input value, calculates the result first.
- * @param op - The operation symbol to set.
- */
-
-/**
- * Clears the current and previous input values and the operation and updates the display.
- */
-
-/**
- * Updates the display element with the current input value.
- */
-
-// Initialize the display with the current input value.
-
 const display = document.querySelector('#display') as HTMLInputElement;
 
-display.value = '0';
+console.log('testing watch mode...');
 
-// const states: string[] = ['init', 'numberInput', 'operationInput', 'result'];
-let activeState: string = 'init';
+// Shows "0" on the display initially
+display.value = '0';
+// Follows the different input states
+let activeState: 'init' | 'number' | 'operator' | 'result' = 'init';
+// Counts how many operators are in a row
+// E.g. "", "+", "*-" are acceptable
+let operatorCount: 0 | 1 | 2 = 0;
 
 function clearDisplay(): void {
   display.value = '0';
   activeState = 'init';
+  operatorCount = 0;
 }
 
 function inputNumber(num: number): void {
@@ -59,8 +27,6 @@ function inputNumber(num: number): void {
     display.value += num;
   }
 }
-
-let operatorCount: number = 0;
 
 function inputOperator(operator: string): void {
   if (activeState === 'init' || activeState === 'number' || activeState === 'result') {
