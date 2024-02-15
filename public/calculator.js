@@ -7,13 +7,13 @@ let activeState = 'initState';
 // Counts how many operators are in a row
 // E.g. "", "+", "*-" are acceptable
 let operatorCount = 0;
+// Helper to keep track of leading 0
 let zeroInFront = false;
 function clearDisplay() {
     display.value = '0';
     activeState = 'initState';
     operatorCount = 0;
     zeroInFront = false;
-    console.log(display.value, activeState);
 }
 function inputNumber(num) {
     if (activeState === 'resultState') {
@@ -47,7 +47,6 @@ function inputNumber(num) {
             display.value += num.toString();
         }
     }
-    console.log(display.value, activeState);
 }
 function inputOperator(operator) {
     if (activeState === 'initState' || activeState === 'numberState' || activeState === 'resultState') {
@@ -70,7 +69,6 @@ function inputOperator(operator) {
         display.value = display.value.slice(0, -2) + operator;
         operatorCount = 1;
     }
-    console.log(display.value, activeState);
 }
 function calculateResult() {
     if (activeState === 'operatorState') {
@@ -82,7 +80,6 @@ function calculateResult() {
     display.value = result.toString();
     activeState = 'resultState';
     zeroInFront = false;
-    console.log(display.value, activeState);
 }
 // Expose the functions to the global scope so they can be accessed from HTML
 const exposedFunctions = {
