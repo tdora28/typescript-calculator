@@ -7,24 +7,44 @@ let activeState: 'initState' | 'numberState' | 'operatorState' | 'resultState' =
 // Counts how many operators are in a row
 // E.g. "", "+", "*-" are acceptable
 let operatorCount: 0 | 1 | 2 = 0;
+let zeroInFront: boolean = false;
 
 function clearDisplay(): void {
   display.value = '0';
   activeState = 'initState';
   operatorCount = 0;
+  zeroInFront = false;
+
+  console.log(display.value, activeState);
 }
 
 function inputNumber(num: number): void {
-  if ((activeState === 'initState' || activeState === 'resultState') && num !== 0) {
+  if (activeState === 'resultState') {
+    if (num === 0) {
+      clearDisplay();
+    } else {
+      display.value = num.toString();
+      activeState = 'numberState';
+    }
+  } else if (activeState === 'initState' && num !== 0) {
     display.value = num.toString();
     activeState = 'numberState';
-  } else if (activeState === 'operatorState' && num !== 0) {
-    // Can't start with 0 after operator, because we don't have decimals
-    display.value += num;
+  } else if (activeState === 'operatorState') {
+    if (num === 0) zeroInFront = true;
+    display.value += num.toString();
     activeState = 'numberState';
   } else if (activeState === 'numberState') {
-    display.value += num;
+    if (zeroInFront && num === 0) {
+      display.value = display.value;
+    } else if (zeroInFront && num !== 0) {
+      display.value = display.value.slice(0, -1) + num.toString();
+      zeroInFront = false;
+    } else {
+      display.value += num.toString();
+    }
   }
+
+  console.log(display.value, activeState);
 }
 
 function inputOperator(operator: string): void {
@@ -45,6 +65,8 @@ function inputOperator(operator: string): void {
     display.value = display.value.slice(0, -2) + operator;
     operatorCount = 1;
   }
+
+  console.log(display.value, activeState);
 }
 
 function calculateResult(): void {
@@ -56,6 +78,9 @@ function calculateResult(): void {
   const result: number = eval(display.value);
   display.value = result.toString();
   activeState = 'resultState';
+  zeroInFront = false;
+
+  console.log(display.value, activeState);
 }
 
 // Expose the functions to the global scope so they can be accessed from HTML
