@@ -76,6 +76,23 @@ function calculateResult(): void {
   zeroInFront = false;
 }
 
+// Keyboard events
+document.addEventListener('keydown', (event) => {
+  const { key } = event;
+
+  if (!isNaN(Number(key))) {
+    inputNumber(Number(key));
+  } else if (['+', '-', '*', '/'].includes(key)) {
+    inputOperator(key);
+  } else if (['=', 'Enter'].includes(key)) {
+    calculateResult();
+  } else if (['Backspace', 'Delete'].includes(key)) {
+    clearDisplay();
+  }
+
+  event.preventDefault();
+});
+
 // Expose the functions to the global scope so they can be accessed from HTML
 const exposedFunctions = {
   clearDisplay,
